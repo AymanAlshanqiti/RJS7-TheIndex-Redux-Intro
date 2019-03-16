@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 
+// Connecting to the Central Store
+import { connect } from "react-redux";
+
 // Data
 import authors from "./data";
 
@@ -41,7 +44,7 @@ class App extends Component {
             <Sidebar addAuthorHandler={this.addAuthor} />
           </div>
           <div className="content col-10">
-            <AuthorsList authors={this.state.authors} />
+            <AuthorsList authors={this.props.authors} />
           </div>
         </div>
       </div>
@@ -49,4 +52,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    authors: state.authors
+  };
+};
+
+export default connect(mapStateToProps)(App);
