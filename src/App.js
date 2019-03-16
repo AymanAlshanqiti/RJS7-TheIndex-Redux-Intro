@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import * as actionCreator from "./store/actions";
 
 // Connecting to the Central Store
 import { connect } from "react-redux";
@@ -30,6 +31,7 @@ class App extends Component {
         }
       ]
     };
+    this.props.addAuthor(newAuthor);
     this.setState({
       authors: this.state.authors.concat(newAuthor),
       newAuthorId: this.state.newAuthorId + 1
@@ -58,4 +60,13 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => {
+  return {
+    addAuthor: newAuthor => dispatch(actionCreator.addAuthor(newAuthor))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

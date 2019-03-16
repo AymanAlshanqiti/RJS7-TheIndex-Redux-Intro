@@ -12,6 +12,12 @@ const reducer = (state = initialState, action) => {
         authors: state.authors.concat(action.payload)
       };
 
+    case "DELETE_AUTHOR":
+      return {
+        ...state,
+        authors: state.authors.filter(author => action.payload !== author)
+      };
+
     default:
       return state;
   }
